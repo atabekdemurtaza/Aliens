@@ -22,6 +22,8 @@ class AlienInvasion:
 		while True:
 			#Событие
 			self._check_events()
+			#Движение корабля
+			self.ship.update()
 			#Рисовать
 			self._update_screen()
 	
@@ -33,7 +35,10 @@ class AlienInvasion:
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RIGHT:
 					#Двигаем кораблик на право
-					self.ship.rect.x += 1
+					self.ship.moving_right = True
+			elif event.type == pygame.KEYUP:
+				if event.key == pygame.K_RIGHT:
+					self.ship.moving_right = False 
 				 
 	
 	def _update_screen(self):
