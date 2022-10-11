@@ -1,5 +1,4 @@
 class Settings:
-
 	#Настройки
 	def __init__(self):
 		#Установка
