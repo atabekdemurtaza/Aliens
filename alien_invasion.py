@@ -4,14 +4,13 @@ from settings import Settings
 from ship import Ship
 
 class AlienInvasion:
-
 	def __init__(self):
 		#Установка
 		pygame.init()
 		self.settings = Settings() 
-		self.screen = pygame.display.set_mode(
-			(self.settings.screen_width, self.settings.screen_height)
-		)
+		self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+		self.settings.screen_width = self.screen.get_rect().width
+		self.settings.screen_height = self.screen.get_rect().height
 		pygame.display.set_caption('Alien Invasion')
 		self.ship = Ship(self)
 		#Установка заднего фона
@@ -47,15 +46,18 @@ class AlienInvasion:
 		pygame.display.flip()
 
 	def _check_keydown_events(self, event):
-		if event.key == pygame.K_RIGHT:
+		if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
 			# Двигаем кораблик на право
 			self.ship.moving_right = True
-		elif event.key == pygame.K_LEFT:
+		elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
 			self.ship.moving_left = True
+		elif event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
+			sys.exit()
+
 	def _check_keyup_events(self, event):
-		if event.key == pygame.K_RIGHT:
+		if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
 			self.ship.moving_right = False
-		elif event.key == pygame.K_LEFT:
+		elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
 			self.ship.moving_left = False
 
 if __name__ == '__main__':
