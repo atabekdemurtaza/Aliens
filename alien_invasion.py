@@ -3,6 +3,7 @@ import sys
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 class AlienInvasion:
 	def __init__(self):
@@ -15,6 +16,9 @@ class AlienInvasion:
 		pygame.display.set_caption('Alien Invasion')
 		self.ship = Ship(self)
 		self.bullets = pygame.sprite.Group()
+		#Пришелец
+		self.aliens = pygame.sprite.Group()
+		self._create_fleet()
 		#Установка заднего фона
 		self.bg_color = self.settings.bg_color
 
@@ -74,6 +78,11 @@ class AlienInvasion:
 			if bullet.rect.bottom <= 0:
 				self.bullets.remove(bullet)
 
+	def _create_fleet(self):
+		#Создаем флот
+		#Cоздаем образ
+		alien = Alien(self)
+		self.aliens.add(alien)
 
 	def _update_screen(self):
 		#Рисовать
@@ -81,6 +90,7 @@ class AlienInvasion:
 		self.ship.blitme()
 		for bullet in self.bullets.sprites():
 			bullet.draw_bullet()
+		self.aliens.draw(self.screen)
 		#Создаем образ
 		pygame.display.flip()
 
