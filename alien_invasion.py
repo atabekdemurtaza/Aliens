@@ -27,6 +27,9 @@ class AlienInvasion:
 			self.ship.update()
 			#Макет снаряда
 			self.bullets.update()
+			#Удаляем старые снаряды из памяти
+			self._update_bullet()
+			#print(len(self.bullets))
 			#Рисовать
 			self._update_screen()
 	
@@ -61,8 +64,16 @@ class AlienInvasion:
 
 	def _fire_bullet(self):
 		"""Создаем новых снарядов и добавляем в группу"""
-		new_bullet = Bullet(self)
-		self.bullets.add(new_bullet)
+		if len(self.bullets) < self.settings.bullet_allowed:
+			new_bullet = Bullet(self)
+			self.bullets.add(new_bullet)
+
+	def _update_bullet(self):
+		"""Берем старые данные и обновляем на новое"""
+		for bullet in self.bullets.copy():
+			if bullet.rect.bottom <= 0:
+				self.bullets.remove(bullet)
+
 
 	def _update_screen(self):
 		#Рисовать
