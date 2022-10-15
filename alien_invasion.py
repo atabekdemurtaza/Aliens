@@ -82,7 +82,16 @@ class AlienInvasion:
 		#Создаем флот
 		#Cоздаем образ
 		alien = Alien(self)
-		self.aliens.add(alien)
+		alien_width = alien.rect.width
+		available_space_x = self.settings.screen_width - (2 * alien_width)
+		numbers_alien_x = available_space_x // (2 * alien_width)
+
+		for alien_number in range(numbers_alien_x):
+			#Создаем пришельца и измеряем локацию
+			alien = Alien(self)
+			alien.x = alien_width + (2 * alien_number * alien_width)
+			alien.rect.x = alien.x
+			self.aliens.add(alien)
 
 	def _update_screen(self):
 		#Рисовать

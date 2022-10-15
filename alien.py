@@ -4,7 +4,7 @@ from pygame.sprite import Sprite
 class Alien(Sprite):
 
     """Отображаем хотя бы одну картину пришельца"""
-    def __init__(self,ai_game):
+    def __init__(self, ai_game):
         """Создаем образ пришельца"""
         super().__init__()
         self.screen = ai_game.screen
