@@ -34,6 +34,7 @@ class AlienInvasion:
 			#Удаляем старые снаряды из памяти
 			self._update_bullet()
 			#print(len(self.bullets))
+			self._update_alien()
 			#Рисовать
 			self._update_screen()
 	
@@ -104,6 +105,9 @@ class AlienInvasion:
 		alien.rect.x = alien.x
 		alien.rect.y = alien.rect.height + (2 * alien.rect.height * row_number)
 		self.aliens.add(alien)
+
+	def _update_alien(self):
+		self.aliens.update()
 
 	def _update_screen(self):
 		#Рисовать
