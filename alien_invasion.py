@@ -106,8 +106,22 @@ class AlienInvasion:
 		alien.rect.y = alien.rect.height + (2 * alien.rect.height * row_number)
 		self.aliens.add(alien)
 
+	def _check_fleet_edges(self):
+		"""Попробуем найти если один из пришельцев врезался в границу"""
+		for alien in self.aliens.sprites():
+			if alien.check_edge():
+				self._change_fleet_direction()
+				break
+
+	def _change_fleet_direction(self):
+		for alien in self.aliens.sprites():
+			alien.rect.y += self.settings.fleet_drop_speed
+		self.settings.fleet_direction *= -1
+
 	def _update_alien(self):
+		self._check_fleet_edges()
 		self.aliens.update()
+
 
 	def _update_screen(self):
 		#Рисовать

@@ -19,3 +19,8 @@ class Settings:
 		# Настройка пришельца
 		self.alien_speed = 1.0
 
+		# Граница
+		self.fleet_drop_speed = 10
+		# +1 +1 -> -1 -1 <-
+		self.fleet_direction = 1
+

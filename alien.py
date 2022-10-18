@@ -20,8 +20,14 @@ class Alien(Sprite):
 
         """Сохраняем горизонтальную локацию пришельца"""
         self.x = float(self.rect.x)
+    def check_edge(self):
+
+        # Возвращает True если один из частей флота врезается
+        screen_rect = self.screen.get_rect()
+        if self.rect.right >= self.rect.right or self.rect.left <= 0:
+            return True
 
     def update(self):
         # Движение пришельца к правой стороне
-        self.x += self.settings.alien_speed
+        self.x += (self.settings.alien_speed * self.settings.fleet_direction)
         self.rect.x = self.x
